@@ -31,7 +31,7 @@ router.post("/api/notes", (req, res) => {
             note_id: randomUUID(),
         };
         readAndAppend(newNote, "./db/db.json")
-        res.json("Successfully Added")
+        res.json(res)
     } else {
         res.error("Error in adding note");
     }
