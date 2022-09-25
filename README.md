@@ -22,4 +22,4 @@ Create a web application that keeps notes logged in a database.
 - Deploying to Heroku was an interesting challenge
 - Importance of creating paths were key
 
-! [Note Taker](datasave.png)
+[Note Taker](datasave.png)

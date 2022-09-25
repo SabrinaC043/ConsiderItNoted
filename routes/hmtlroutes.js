@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { randomUUID } = require("crypto");
-const { readFromFile, readAndAppend } = require("../helpers/fsUtils");
+const { readFromFile, readAndAppend, writeToFile } = require("../helpers/fsUtils");
 const path = require("path");
 
 
@@ -20,8 +20,6 @@ router.get("/api", (req, res) => {
 
 
 router.post("/api/notes", (req, res) => {
-    console.log(req.body);
-
     const { title, text } = req.body;
 
     if (title && text) {
@@ -30,10 +28,13 @@ router.post("/api/notes", (req, res) => {
             text,
             note_id: randomUUID(),
         };
-        readAndAppend(newNote, "./db/db.json")
-        res.json(res)
+
+        readAndAppend(newNote, "./db/db.json");
+        res.json(`Note input successful`)
+
     } else {
-        res.error("Error in adding note");
+        res.error("Error in adding Note");
+
     }
 });
 
