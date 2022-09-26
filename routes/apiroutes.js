@@ -19,7 +19,7 @@ api.post("/api/notes", (req, res) => {
             note_id: randomUUID(),
         };
 
-        readAndAppend(newNote, "./db/db.json");
+        readAndAppend(newNote, "../public/pages/notes.html");
         res.json(`Note input successful ${req.body} received`);
         res.json(response);
     } else {
