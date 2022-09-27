@@ -9,7 +9,7 @@ api.get("/api", (req, res) => {
 });
 
 
-api.post("/api/notes", (req, res) => {
+api.post("/notes", (req, res) => {
     const { title, text } = req.body;
     writeToFile(destination, newNote)
     if (title && text) {
