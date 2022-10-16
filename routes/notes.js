@@ -5,13 +5,16 @@ const router = require("express").Router();
 const { randomUUID } = require("crypto");
 const { readFromFile, writeToFile, readAndAppend } = require("../helpers/fsUtils");
 
-router.get("/", (req, res) => {
+
+router.get("/notes", (req, res) => {
     readFromFile("../db/db.json").then((data) => res.json(JSON.parse(data)));
 });
 
-router.post("/", (req, res) => {
+router.post("/notes", (req, res) => {
     // destructuring assignnment for the items in req.body
+    res.json(`${req.method}request accepted`)
     const { title, text } = req.body;
+    writeToFile("../db/db.json", newNote)
     if (title && text) {
         const newNote = {
             title,
@@ -19,17 +22,10 @@ router.post("/", (req, res) => {
             note_id: randomUUID(),
         };
 
-        writeToFile("../db/db.json", newNote);
-        response.json(`${req.body}`);
+        readAndAppend(newNote, "../db/db.json")
     } else {
-        response.json("Error in adding Note");
+        res.json("Error in posting note")
     }
-    readAndAppend(newNote, "../db/db.json");
-    res.json("Note information added");
-    const response = {
-        status: "success",
-        body: newNote,
-    };
 });
 
 module.exports = router;
